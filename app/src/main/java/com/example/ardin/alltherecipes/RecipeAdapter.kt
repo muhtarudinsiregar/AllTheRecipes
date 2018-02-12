@@ -2,6 +2,7 @@ package com.example.ardin.alltherecipes
 
 import android.content.Context
 import android.graphics.Typeface
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,16 @@ class RecipeAdapter(context: Context, items: ArrayList<Recipe>) : BaseAdapter() 
     var mInflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater;
     var mDataSource: ArrayList<Recipe> = items
 
+    private val LABEL_COLORS = object : HashMap<String, Int>() {
+        init {
+            put("Low-Carb", R.color.colorLowCarb)
+            put("Low-Fat", R.color.colorLowFat)
+            put("Low-Sodium", R.color.colorLowSodium)
+            put("Medium-Carb", R.color.colorMediumCarb)
+            put("Vegetarian", R.color.colorVegetarian)
+            put("Balanced", R.color.colorBalanced)
+        }
+    }
 
     //getView() creates a view to be used as a row in the list.
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -47,6 +58,8 @@ class RecipeAdapter(context: Context, items: ArrayList<Recipe>) : BaseAdapter() 
 
         val detailTypeface = Typeface.createFromAsset(mContext.assets, "fonts/Quicksand-Bold.otf")
         detailTextView.setTypeface(detailTypeface)
+
+        detailTextView.setTextColor(ContextCompat.getColor(mContext, LABEL_COLORS.get(recipe.label)!!));
 
         return rowView
     }
