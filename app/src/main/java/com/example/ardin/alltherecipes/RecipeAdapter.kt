@@ -11,23 +11,22 @@ import com.example.ardin.alltherecipes.R.id.*
 import com.squareup.picasso.Picasso
 
 
-/**
- * Created by ardin on 12/02/18.
- */
-class RecipeAdapter : BaseAdapter() {
-    lateinit var mContext: Context
-    lateinit var mInflater: LayoutInflater
-    lateinit var mDataSource: ArrayList<Recipe>
+class RecipeAdapter(context: Context, items: ArrayList<Recipe>) : BaseAdapter() {
+    var mContext: Context = context
+    var mInflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater;
+    var mDataSource: ArrayList<Recipe> = items
+
 
     //getView() creates a view to be used as a row in the list.
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         //init
         val rowView = mInflater.inflate(R.layout.list_item_recipe, parent, false)
-        val titleTextView = recipe_list_title as TextView
-        val subtitleTextView = recipe_list_subtitle as TextView
-        val detailTextView = recipe_list_detail as TextView
-        val thumbnailImageView = recipe_list_thumbnail as ImageView
+        val titleTextView = rowView.findViewById(R.id.recipe_list_title) as TextView
+//        val titleTextView = recipe_list_title as TextView
+        val subtitleTextView = rowView.findViewById(recipe_list_subtitle) as TextView
+        val detailTextView = rowView.findViewById(recipe_list_detail) as TextView
+        val thumbnailImageView = rowView.findViewById(recipe_list_thumbnail) as ImageView
 
         //get item recipe by position
         val recipe = getItem(position) as Recipe
