@@ -1,6 +1,7 @@
 package com.example.ardin.alltherecipes
 
 import android.content.Context
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,16 @@ class RecipeAdapter(context: Context, items: ArrayList<Recipe>) : BaseAdapter() 
         subtitleTextView.setText(recipe.description)
         detailTextView.setText(recipe.label)
         Picasso.with(mContext).load(recipe.imageUrl).placeholder(R.mipmap.ic_launcher).into(thumbnailImageView)
+
+        //set typeface for view
+        val titleTypeFace = Typeface.createFromAsset(mContext.assets, "fonts/JosefinSans-Bold.ttf")
+        titleTextView.setTypeface(titleTypeFace)
+
+        val subtitleTypeface = Typeface.createFromAsset(mContext.assets, "fonts/JosefinSans-SemiBoldItalic.ttf")
+        subtitleTextView.setTypeface(subtitleTypeface)
+
+        val detailTypeface = Typeface.createFromAsset(mContext.assets, "fonts/Quicksand-Bold.otf")
+        detailTextView.setTypeface(detailTypeface)
 
         return rowView
     }
